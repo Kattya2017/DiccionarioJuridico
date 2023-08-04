@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-5 d-flex justify-content-between">
+                    <div class="col-lg-4">
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRegistrar" data-whatever="@mdo">
+                        <i class="fa fa-plus-square"></i> Registrar</button>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <select class="form-control custom-select" (change)="mostrarPalabraTipo($event)">
+                          <option value="1" selected>Habilitados</option>
+                          <option value="0">Deshabilitados</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+    
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Id</th>
+                        <th scope="col" class="text-center">Titulo</th>
+                        <th scope="col" class="text-center">Titulo shipibo</th>
+                        <th scope="col" class="text-center">Descripcion</th>
+                        <th scope="col" class="text-center">Descripcion shipibo</th>
+                        <th class="text-center">Editar</th>
+                        <th class="text-center">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let palabra of listPalabra!">
+                        <td class="text-center">{{palabra.id}}</td>
+                        <td class="text-center">{{palabra.titulo}}</td>
+                        <td class="text-center">{{palabra.titulo_shipibo}}</td>
+                        <td class="text-center">{{palabra.descripcion}}</td>
+                        <td class="text-center">{{palabra.descripcion_shipibo}}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarSede" data-whatever="@mdo" (click)="ObtenerAbecedarioId(palabra.id)">
+                              <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    
+    
+        <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;" >REGISTRAR PALABRA</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Titulo</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Titulo shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="descripcion">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Descripcion shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="descripcion_shipibo">
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="registrarPalabra()" [disabled]="palabraForm.invalid">Registrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+
+
+          <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;" >EDITAR PALABRA</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Titulo</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Titulo shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Descripcion</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="descripcion">
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Descripcion shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="descripcion_shipibo">
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="modificarPalabra()" [disabled]="palabraEditarForm.invalid">Editar</button>
+                </div>
+              </div>
+            </div>
+          </div>   
