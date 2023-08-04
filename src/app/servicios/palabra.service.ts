@@ -12,8 +12,8 @@ export class PalabraService {
   url=`${environment.backendUrl}/palabra`;
   constructor(private http:HttpClient, private router:Router){}
 
-  getPalabraAbecedario(id:string):Observable<any>{
-    return this.http.get(`${this.url}/${id}`);
+  getPalabraAbecedario():Observable<any>{
+    return this.http.get(this.url);
   }
 
   getPalabraId(id:string|number):Observable<any>{

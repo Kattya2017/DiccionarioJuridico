@@ -71,7 +71,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form [formGroup]="abecedarioForm">
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Abecedario</label>
                   <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
@@ -108,7 +108,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form [formGroup]="abecedarioEditarForm">
                 <div class="form-group">
                   <label for="recipient-name" class="col-form-label">Abecedario</label>
                   <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">

@@ -8,6 +8,9 @@ import { GraficaComponent } from './grafica/grafica.component';
 import { SharedModule } from '../shared/shared.module';
 import { AbecedarioComponent } from './abecedario/abecedario.component';
 import { PalabraComponent } from './palabra/palabra.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,7 +24,11 @@ import { PalabraComponent } from './palabra/palabra.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule
   ]
 })
 export class AdminModule { }

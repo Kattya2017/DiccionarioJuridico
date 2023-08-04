@@ -7,31 +7,24 @@
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRegistrar" data-whatever="@mdo">
                         <i class="fa fa-plus-square"></i> Registrar</button>
                     </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <select class="form-control custom-select" (change)="mostrarPalabraTipo($event)">
-                          <option value="1" selected>Habilitados</option>
-                          <option value="0">Deshabilitados</option>
-                        </select>
-                      </div>
-                    </div>
                   </div>
     
             <table class="table">
                 <thead>
                     <tr>
                         <th scope="col" class="text-center">Id</th>
+                        <th scope="col" class="text-center">Abecedario</th>
                         <th scope="col" class="text-center">Titulo</th>
                         <th scope="col" class="text-center">Titulo shipibo</th>
                         <th scope="col" class="text-center">Descripcion</th>
                         <th scope="col" class="text-center">Descripcion shipibo</th>
                         <th class="text-center">Editar</th>
-                        <th class="text-center">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let palabra of listPalabra!">
+                    <tr *ngFor="let palabra of listPalabra">
                         <td class="text-center">{{palabra.id}}</td>
+                        <td class="text-center">{{palabra.abecedario}}</td>
                         <td class="text-center">{{palabra.titulo}}</td>
                         <td class="text-center">{{palabra.titulo_shipibo}}</td>
                         <td class="text-center">{{palabra.descripcion}}</td>
@@ -58,7 +51,14 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form [formGroup]="palabraForm">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Seleccionar Abecedario:</label><br>
+                      <select class="form-control custom-select" formControlName="abecedario">
+                        <option selected value="">Seleccionar</option>
+                        <option *ngFor="let abecedario of listAbecedario" value="{{abecedario.id}}">{{abecedario.abecedario}}</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Titulo</label>
                       <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
@@ -97,10 +97,17 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form [formGroup]="palabraEditarForm">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Seleccionar Abecedario:</label><br>
+                      <select class="form-control custom-select" formControlName="abecedario">
+                        <option selected value="">Seleccionar</option>
+                        <option *ngFor="let abecedario of listAbecedario" value="{{abecedario.id}}">{{abecedario.abecedario}}</option>
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Titulo</label>
-                      <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+                      <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Titulo shipibo</label>
