@@ -14,6 +14,7 @@ export interface Resp {
     descripcion_shipibo: string;
     audio: string;
     id_abecedario: number;
+    Abecedario : Abecedario;
 }
 
 export interface Abecedario{

@@ -45,6 +45,7 @@ if(this.carga){
   Swal.fire({
     title:'Cargando datos!',
     html:'Por favor espere',
+    timer:1500,
     timerProgressBar: true,
     didOpen: () =>{
       Swal.showLoading();
@@ -54,6 +55,7 @@ if(this.carga){
 this.abecedarioService.getAbecedario(this.estado).subscribe({
   next:(data)=>{
     this.listAbecedario = data.resp;
+    console.log(this.listAbecedario);
     this.carga = false;
     if(!this.carga){
       Swal.close();
@@ -96,11 +98,12 @@ this.abecedarioService.postAbecedario(formData).subscribe({
 modificarAbecedario(){
 const formData = new FormData();
 formData.append('abecedario', this.abecedarioEditarForm.get('abecedario')?.value);
-formData.append('abecedario_shipibo', this.abecedarioEditarForm.get('abecedario')?.value);
+formData.append('abecedario_shipibo', this.abecedarioEditarForm.get('abecedario_shipibo')?.value);
 formData.append('titulo', this.abecedarioEditarForm.get('titulo')?.value);
 formData.append('titulo_shipibo', this.abecedarioEditarForm.get('titulo_shipibo')?.value);
 this.abecedarioService.putAbecedario(formData, this.ids!).subscribe({
   next:(data)=>{
+    console.log(data);
     Swal.fire(
       'Editado!',
       'Se edito el abecedario con exito',

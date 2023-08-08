@@ -40,7 +40,7 @@
                     <td *ngIf="abecedario.estado===1" class="text-center">Activo</td>
                     <td *ngIf="abecedario.estado===0" class="text-center">Inactivo</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarSede" data-whatever="@mdo" (click)="ObtenerAbecedarioId(abecedario.id)">
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarRegistro" data-whatever="@mdo" (click)="ObtenerAbecedarioId(abecedario.id)">
                           <i class="fa fa-edit"></i>
                         </button>
                     </td>
@@ -98,6 +98,7 @@
         </div>
       </div>
 
+      
       <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
