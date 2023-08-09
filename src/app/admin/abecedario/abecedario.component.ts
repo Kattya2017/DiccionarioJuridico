@@ -45,7 +45,6 @@ if(this.carga){
   Swal.fire({
     title:'Cargando datos!',
     html:'Por favor espere',
-    timer:1500,
     timerProgressBar: true,
     didOpen: () =>{
       Swal.showLoading();
@@ -79,6 +78,7 @@ formData.append('titulo', this.abecedarioForm.get('titulo')?.value);
 formData.append('titulo_shipibo', this.abecedarioForm.get('titulo_shipibo')?.value);
 this.abecedarioService.postAbecedario(formData).subscribe({
   next:(data)=>{
+    console.log(data);
     Swal.fire(
       'Registrado!',
       'Se registro el abecedario con exito',
