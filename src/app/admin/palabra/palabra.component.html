@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <div class="row mb-5 d-flex justify-content-between">
+                <div class="row mb-4 d-flex justify-content-between">
                     <div class="col-lg-4">
                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRegistrar" data-whatever="@mdo">
                         <i class="fa fa-plus-square"></i> Registrar</button>
@@ -19,6 +19,7 @@
                         <th scope="col" class="text-center">Descripcion</th>
                         <th scope="col" class="text-center">Descripcion shipibo</th>
                         <th class="text-center">Editar</th>
+                        <th class="text-center">Actualizar audio</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +32,14 @@
                         <td class="text-center">{{palabra.descripcion_shipibo}}</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarRegistro" data-whatever="@mdo" (click)="ObtenerAbecedarioId(palabra.id)">
-                              <i class="fa fa-edit"></i>
+                              <i class="fa fa-pencil"></i>
                             </button>
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#editarDocumentoMerito"
+                            data-whatever="@mdo">
+                            <i class="fa fa-music"></i>
+                          </button>
                         </td>
                     </tr>
                 </tbody>
@@ -42,7 +49,173 @@
         </div>
     
     
-        <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Registrar palabra -->
+<div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;" >REGISTRAR PALABRA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="palabraForm">
+          <div class="row">
+
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">SELECCIONAR ABECEDARIO</h5>
+              <hr>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Seleccionar Abecedario:</label><br>
+                  <select class="form-control custom-select" formControlName="letra">
+                    <option selected value="">Seleccionar</option>
+                    <option *ngFor="let abecedario of listAbecedario" value="{{abecedario.id}}">{{abecedario.abecedario}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">REGISTRAR TITULO</h5>
+              <hr>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Ingresar titulo</label>
+                  <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Ingresar titulo en shipibo</label>
+                  <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">REGISTRAR DESCRIPCION</h5>
+              <hr>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ingresar descripcion</label><br>
+                <textarea type="text" class="form-control" id="recipient-name" rows="5" formControlName="descripcion"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ingresar descripcion en shipibo</label><br>
+                <textarea type="text" class="form-control" id="recipient-name" rows="5" formControlName="descripcion_shipibo"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group validate">
+                <h5>Adjuntar audio <span class="text-danger">*</span></h5>
+                <div class="controls">
+                  <input type="file" name="file" id="filesInput" class="form-control" required="" aria-invalid="false" accept="application/pdf">
+                  <div class="help-block">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="registrarPalabra()" [disabled]="palabraForm.invalid">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modificar palabra -->      
+<div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">EDITAR PALABRA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="palabraEditarForm">
+          <div class="row">
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color: #006605;font-size: 13px;">SELECCIONAR ABECEDARIO</h5>
+              <hr>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Seleccionar Abecedario:</label><br>
+                  <select class="form-control custom-select" formControlName="letra">
+                    <option selected value="">Seleccionar</option>
+                    <option *ngFor="let abecedario of listAbecedario" value="{{abecedario.id}}">{{abecedario.abecedario}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color: #006605;font-size: 13px;">EDITAR TITULO</h5>
+              <hr>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Ingresar titulo</label>
+                  <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Ingresar titulo en shipibo</label>
+                  <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <h5 style="font-weight: 900;color:#006605;font-size: 13px;">EDITAR DESCRIPCION</h5>
+              <hr>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ingresar descripcion</label><br>
+                <textarea type="text" class="form-control" id="recipient-name" rows="5" formControlName="descripcion"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ingresar descripcion en shipibo</label><br>
+                <textarea type="text" class="form-control" id="recipient-name" rows="5" formControlName="descripcion_shipibo"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="modificarPalabra()" [disabled]="palabraEditarForm.invalid">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+        <!--<div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -84,11 +257,11 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
     
 
 
-          <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!--<div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -130,4 +303,4 @@
                 </div>
               </div>
             </div>
-          </div>   
+          </div>   -->

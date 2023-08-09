@@ -2,7 +2,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-body">
-            <div class="row mb-5 d-flex justify-content-between">
+            <div class="row mb-4 d-flex justify-content-between">
                 <div class="col-lg-4">
                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRegistrar" data-whatever="@mdo">
                     <i class="fa fa-plus-square"></i> Registrar</button>
@@ -41,7 +41,7 @@
                     <td *ngIf="abecedario.estado===0" class="text-center">Inactivo</td>
                     <td class="text-center">
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarRegistro" data-whatever="@mdo" (click)="ObtenerAbecedarioId(abecedario.id)">
-                          <i class="fa fa-edit"></i>
+                          <i class="fa fa-pencil"></i>
                         </button>
                     </td>
                     <td *ngIf="abecedario.estado===0" class="text-center">
@@ -62,77 +62,132 @@
     </div>
 
 
+<!-- Registrar abecedario -->
     <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;" >REGISTRAR ABECEDARIO</h5>
+              <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">REGISTRAR ABECEDARIO</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <form [formGroup]="abecedarioForm">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Abecedario</label>
-                  <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">INGRESAR ABECEDARIO</h5>
+                    <hr>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Ingresar letra</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Ingresar letra en shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="abecedario_shipibo">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">INGRESAR TITULO</h5>
+                    <hr>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Ingresar titulo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Ingresar titulo en shipibo</label>
+                        <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Abecedario shipibo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="abecedario_shipibo">
-                  </div>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
-                  </div>
-                  <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo shipibo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
-                  </div>
               </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
-              <button type="button" class="btn btn-primary" (click)="registrarAbecedario()" [disabled]="abecedarioForm.invalid">Registrar</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+                <button type="button" class="btn btn-success" (click)="registrarAbecedario()" [disabled]="abecedarioForm.invalid">Registrar</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       
-      <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;" >EDITAR ABECEDARIO</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form [formGroup]="abecedarioEditarForm">
-                <div class="form-group">
-                  <label for="recipient-name" class="col-form-label">Abecedario</label>
-                  <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+
+
+     <!-- Modificar abecedario -->      
+     <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">EDITAR ABEBCEDARIO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="abecedarioEditarForm">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h5 style="font-weight: 900;color: #006605;font-size: 13px;">INGRESAR ABECEDARIO</h5>
+                  <hr>
                 </div>
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Abecedario shipibo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="abecedario_shipibo">
-                  </div>
+                <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Ingresar letra</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="abecedario">
+                    </div>
                   </div>
+                </div>
+                <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Titulo shipibo</label>
-                    <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Ingresar letra en shipibo</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="abecedario_shipibo">
+                    </div>
                   </div>
-              </form>
-            </div>
+                </div>
+                <div class="col-lg-12">
+                  <h5 style="font-weight: 900;color:#006605;font-size: 13px;">INGRESAR TITULO</h5>
+                  <hr>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Ingresar titulo</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="titulo">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Ingresar titulo en shipibo</label>
+                      <input type="text" class="form-control" id="recipient-name" formControlName="titulo_shipibo">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
               <button type="button" class="btn btn-primary" (click)="modificarAbecedario()" [disabled]="abecedarioEditarForm.invalid">Editar</button>
             </div>
           </div>
         </div>
-      </div>   
+      </div>
+    </div>

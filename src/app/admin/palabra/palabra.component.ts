@@ -31,6 +31,7 @@ export class PalabraComponent implements OnInit {
       descripcion: ['', Validators.required],
       descripcion_shipibo: ['', Validators.required],
       letra: ['', Validators.required],
+      audio:['', Validators.required],
     });
     this.palabraEditarForm = this.fb.group({
       titulo: ['', Validators.required],
@@ -38,6 +39,7 @@ export class PalabraComponent implements OnInit {
       descripcion: ['', Validators.required],
       descripcion_shipibo: ['', Validators.required],
       letra: ['', Validators.required],
+      audio:['', Validators.required],
     });
   }
 
@@ -97,6 +99,7 @@ export class PalabraComponent implements OnInit {
     formData.append('descripcion', this.palabraForm.get('descripcion')?.value);
     formData.append('descripcion_shipibo', this.palabraForm.get('descripcion_shipibo')?.value );
     formData.append('id_abecedario', this.palabraForm.get('letra')?.value);
+    formData.append('audio', this.palabraForm.get('audio')?.value);
     this.palabraService.postPalabra(formData).subscribe({
       next: (data) => {
         Swal.fire('Registrado!',
@@ -119,6 +122,7 @@ export class PalabraComponent implements OnInit {
     formData.append('descripcion', this.palabraEditarForm.get('descripcion')?.value);
     formData.append('descripcion_shipibo', this.palabraEditarForm.get('descripcion_shipibo')?.value);
     formData.append('id_abecedario', this.palabraEditarForm.get('letra')?.value);
+    formData.append('audio', this.palabraEditarForm.get('audio')?.value);
     this.palabraService.putPalabra(formData, this.ids!).subscribe({
       next: (data) => {
         console.log(data);
@@ -140,6 +144,7 @@ export class PalabraComponent implements OnInit {
           descripcion: data.resp.descripcion,
           descripcion_shipibo: data.resp.descripcion_shipibo,
           id_abecedario: data.resp.id_abecedario,
+          audio:data.resp.audio,
         });
         this.ids = data.resp.id;
       },
@@ -158,6 +163,7 @@ export class PalabraComponent implements OnInit {
           descripcion: data.resp.descripcion,
           descripcion_shipibo: data.resp.descripcion_shipibo,
           letra: data.resp.id_abecedario,
+          audio: data.resp.audio,
         });
         this.ids = data.resp.id;
       },
@@ -179,6 +185,7 @@ export class PalabraComponent implements OnInit {
       descripcion: '',
       descripcion_shipibo: '',
       letra: '',
+      audio:'',
     });
     this.palabraEditarForm.setValue({
       titulo: '',
@@ -186,6 +193,7 @@ export class PalabraComponent implements OnInit {
       descripcion: '',
       descripcion_shipibo: '',
       letra: '',
+      audio:'',
     });
   }
 }
