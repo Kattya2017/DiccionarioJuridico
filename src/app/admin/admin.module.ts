@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdministradorComponent } from './administrador/administrador.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DashboardComponent,
     GraficaComponent,
     AbecedarioComponent,
-    PalabraComponent
+    PalabraComponent,
+    AdministradorComponent
   ],
   imports: [
     CommonModule,

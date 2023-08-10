@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraficaComponent } from './grafica/grafica.component';
 import { AbecedarioComponent } from './abecedario/abecedario.component';
 import { PalabraComponent } from './palabra/palabra.component';
+import { AdministradorComponent } from './administrador/administrador.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       {path:'',component:DashboardComponent},
       {path:'grafica',component:GraficaComponent},
       {path:'abecedario',component:AbecedarioComponent},
-      {path:'palabra',component:PalabraComponent}
+      {path:'palabra',component:PalabraComponent},
+      {path:'administrador',component:AdministradorComponent},
     ]
   }
 ];

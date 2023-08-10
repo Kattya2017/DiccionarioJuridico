@@ -1,0 +1,184 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mb-4 d-flex justify-content-between">
+                    <div class="col-lg-4">
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRegistrar" data-whatever="@mdo">
+                        <i class="fa fa-plus-square"></i> Registrar</button>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <select class="form-control custom-select" (change)="mostrarAdministradorTipo($event)">
+                          <option value="1" selected>Habilitados</option>
+                          <option value="0">Deshabilitados</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+    
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Id</th>
+                        <th scope="col" class="text-center">Nombre</th>
+                        <th scope="col" class="text-center">Apellido</th>
+                        <th scope="col" class="text-center">Usuario</th>
+                        <th scope="col" class="text-center">Password</th>
+                        <th scope="col" class="text-center">Estado</th>
+                        <th class="text-center">Editar</th>
+                        <th class="text-center">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let administrador of listAdministrador! | paginate:{itemsPerPage: 12, currentPage: p}">
+                        <td class="text-center">{{administrador.id}}</td>
+                        <td class="text-center">{{administrador.nombre}}</td>
+                        <td class="text-center">{{administrador.apellido}}</td>
+                        <td class="text-center">{{administrador.usuario}}</td>
+                        <td class="text-center">{{administrador.password}}</td>
+                        <td *ngIf="administrador.estado===1" class="text-center">Activo</td>
+                        <td *ngIf="administrador.estado===0" class="text-center">Inactivo</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modificarRegistro" data-whatever="@mdo" (click)="obtenerAdministradorId(administrador.id)">
+                              <i class="fa fa-pencil"></i>
+                            </button>
+                        </td>
+                        <td *ngIf="administrador.estado===0" class="text-center">
+                            <button type="button" class="btn btn-secondary" (click)="eliminarAdministrador(administrador.id, 1)">
+                              <i class="fa fa-lock-open"></i>
+                            </button>
+                        </td>
+                        <td *ngIf="administrador.estado===1" class="text-center">
+                            <button type="button" class="btn btn-secondary" (click)="eliminarAdministrador(administrador.id, 0)">
+                              <i class="fa fa-lock"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+
+
+<!-- Registrar administrador -->
+<div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">REGISTRAR ADMINISTRADOR</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="administradorForm">
+            <div class="row">
+              <div class="col-lg-12">
+                <h5 style="font-weight: 900;color: rgba(0, 102, 5, 123);font-size: 13px;">INGRESAR DATOS</h5>
+                <hr>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar Nombre</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="nombre">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar Apellido</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="apellido">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar usuario</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="usuario">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar password</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="password">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="registrarAdministrador()" [disabled]="administradorForm.invalid">Registrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modificar administrador -->      
+  <div class="modal fade" id="modificarRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel" style="font-weight: bold;">EDITAR ADMINISTRADOR</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="administradorEditarForm">
+            <div class="row">
+              <div class="col-lg-12">
+                <h5 style="font-weight: 900;color: #006605;font-size: 13px;">EDITAR DATOS</h5>
+                <hr>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar nombre</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="nombre">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar apellido</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="apellido">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar usuario</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="usuario">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Ingresar password</label>
+                    <input type="text" class="form-control" id="recipient-name" formControlName="password">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="modificarAdministrador()" [disabled]="administradorEditarForm.invalid">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
