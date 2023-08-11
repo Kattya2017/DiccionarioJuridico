@@ -28,3 +28,25 @@
     right: 0px;
     position: absolute;
     height: 100%; }
+
+    .titulo {
+      margin-top: 10px;
+    }
+    .titlegeneral {
+      /*font-family: 'Anton', sans-serif;*/
+      font-family: 'Outfit', sans-serif;
+      color: black;
+    }
+    .subtitle {
+      color: black;
+    }
+    
+    .titulo2 {
+      margin-top: 100px;
+      color: black;
+    }
+    
+    .titlegeneral2 {
+      font-family: 'Outfit', sans-serif;
+      color: black;
+    }

@@ -7,7 +7,11 @@ import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { HomeModule } from './home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { AdministradorGuard } from './guards/administrador.guard';
 
 @NgModule({
   declarations: [
@@ -20,9 +24,19 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     HomeModule,
     AdminModule,
-    AuthModule
+    AuthModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    AdministradorGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
