@@ -6,6 +6,7 @@ import { GraficaComponent } from './grafica/grafica.component';
 import { AbecedarioComponent } from './abecedario/abecedario.component';
 import { PalabraComponent } from './palabra/palabra.component';
 import { AdministradorComponent } from './administrador/administrador.component';
+import { AdminGuard } from '../guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
       {path:'abecedario',component:AbecedarioComponent},
       {path:'palabra',component:PalabraComponent},
       {path:'administrador',component:AdministradorComponent},
-    ]
+    ],
+    canActivateChild:[AdminGuard]
   }
 ];
 

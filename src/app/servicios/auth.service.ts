@@ -23,7 +23,7 @@ export class AuthService {
 
   loggoud(){
     sessionStorage.removeItem('x-token');
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 
   resetPassword(body:FormData):Observable<any>{

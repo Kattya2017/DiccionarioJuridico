@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     formData.append('password', this.dataLogin.get('password')?.value);
     this.loginService.login(formData).subscribe({
       next:(data)=>{
-        console.log(data);
         if(data.ok === false){
           Swal.fire({
             position: 'top-end',
@@ -42,21 +41,16 @@ export class LoginComponent implements OnInit {
             timer: 1500,
           });
         }else if(data.ok===true){
-          const cargo = data.user;
-          console.log(cargo);
-  
           sessionStorage.setItem('carga','0');
           sessionStorage.setItem('x-token', data.token);
-          sessionStorage.setItem('usuario', data.user.usuario);
-          sessionStorage.setItem('cargo', data.user);
-          if (cargo==='UA') {
-            this.router.navigateByUrl('/admin');
-          }}
-        
+          sessionStorage.setItem('usuario', data.user.nombre);
+          this.router.navigateByUrl('/admin');
+        }
+
       },
       error:(error)=>{
         console.log(error);
-        
+
       }
     })
   }

@@ -11,7 +11,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { AdministradorGuard } from './guards/administrador.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { AdministradorGuard } from './guards/administrador.guard';
     NgxPaginationModule
   ],
   providers: [
-    AdministradorGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorInterceptor,
