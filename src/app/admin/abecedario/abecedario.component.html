@@ -32,7 +32,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let abecedario of listAbecedario! | paginate:{itemsPerPage: 12, currentPage: p}">
-                    <td class="text-center">{{abecedario.id}}</td>
+                    <td class="text-center">{{abecedario.ids}}</td>
                     <td class="text-center">{{abecedario.abecedario}}</td>
                     <td class="text-center">{{abecedario.abecedario_shipibo}}</td>
                     <td class="text-center">{{abecedario.titulo}}</td>

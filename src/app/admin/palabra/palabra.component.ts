@@ -16,6 +16,7 @@ export class PalabraComponent implements OnInit {
   listAbecedario?: Array<any>;
   palabraForm: FormGroup;
   palabraEditarForm: FormGroup;
+  inputBuscar: string = '';
   ids?: string | number;
   carga: boolean = false;
   p:number = 1;
@@ -177,6 +178,13 @@ export class PalabraComponent implements OnInit {
   mostrarPalabraTipo(event: any) {
     console.log(event.target.value);
     this.mostrarPalabra();
+  }
+
+  buscar(event: string){
+    this.inputBuscar = event;
+    if (this.inputBuscar.length >= 0) {
+      
+    }
   }
 
   cancelar() {

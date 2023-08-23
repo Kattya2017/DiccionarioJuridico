@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let palabra of listPalabra! | paginate:{itemsPerPage: 10, currentPage: p}">
-                        <td scope="row" class="text-center">{{palabra.id}}</td>
+                        <td scope="row" class="text-center">{{palabra.ids}}</td>
                         <td class="text-center">{{palabra.Abecedario.abecedario}}</td>
                         <td class="text-center">{{palabra.titulo}}</td>
                         <td class="text-center">{{palabra.titulo_shipibo}}</td>
