@@ -62,12 +62,13 @@ export class PalabraComponent implements OnInit {
       });
       this.palabraService.getPalabraAbecedario().subscribe({
         next: (data:ResultAbecedario) => {
-          console.log(data);
+          
           this.listPalabra = data.resp;
           this.carga = false;
           if (!this.carga) {
             Swal.close();
           }
+          console.log(this.listPalabra);
         },
         error: (error) => {
           this.carga = false;
@@ -82,7 +83,7 @@ export class PalabraComponent implements OnInit {
 
   mostrarAbecedario() {
     this.abecedarioService.getAbecedario().subscribe({
-      next: (data) => {
+      next: (data: ResultAbecedario) => {
         this.listAbecedario = data.resp;
         console.log(this.listAbecedario);
       },
