@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { RouterModule } from '@angular/router';
+import { BuscarPalabrasComponent } from './buscar-palabras/buscar-palabras.component';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    BuscarPalabrasComponent
   ],
   imports: [
     CommonModule,

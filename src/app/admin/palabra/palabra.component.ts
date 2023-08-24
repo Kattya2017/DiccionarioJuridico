@@ -183,9 +183,17 @@ export class PalabraComponent implements OnInit {
   buscar(event: string){
     this.inputBuscar = event;
     if (this.inputBuscar.length >= 0) {
-      
+      this.palabraService.getPalabraAbecedario(this.inputBuscar).subscribe({
+        next:(data)=>{
+          this.listPalabra = data.resp;
+        },
+        error:(error)=>{
+          console.log(error);
+        }
+      })
     }
   }
+
 
   cancelar() {
     this.palabraForm.setValue({
